@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.widget.Toast;
 
@@ -70,19 +71,20 @@ public class MyService extends Service {
             notificationManager.createNotificationChannel(notificationChannel);
         }
         startForeground(1, build.build());
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                stopSelf();
-//                stopForeground(true);
-//            }
-//        },2000);
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
-//    }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                stopSelf();
+                stopForeground(true);
+            }
+        },2000);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
+
     }
 }
